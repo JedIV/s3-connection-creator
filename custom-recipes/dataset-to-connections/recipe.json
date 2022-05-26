@@ -1,72 +1,45 @@
-// This file is the descriptor for the Custom code recipe dataset-to-connections
 {
-    // Meta data for display purposes
-    "meta": {
-        // label: name of the recipe as displayed, should be short
-        "label": "Dataset to connections",
-        // description: longer string to help end users understand what this recipe does
-        "description": "Generates a set of S3 connections for list of roles and the groups to associate them with.",
-        // icon: must be one of the FontAwesome 3.2.1 icons, complete list here at https://fontawesome.com/v3.2.1/icons/
-        "icon": "icon-circle-blank"
-    },
 
-    "kind": "PYTHON",
-    "selectableFromDataset": "input_list",
+	"meta": {
 
-    // Inputs and outputs are defined by roles. In the recipe's I/O tab, the user can associate one
-    // or more dataset to each input and output role.
+		"label": "Dataset to connections",
 
-    // The "arity" field indicates whether the user can associate several datasets to the role ('NARY')
-    // or at most one ('UNARY'). The "required" field indicates whether the user is allowed to
-    // associate no dataset with the role.
+		"description": "Generates a set of S3 connections for list of roles and the groups to associate them with.",
 
-    "inputRoles": [
-        {
-            "name": "input_list",
-            "label": "Input List",
-            "description": "dataset with role-group combinations",
-            "arity": "UNARY",
-            "required": true,
-            "acceptsDataset": true
-        }
-    ],
+		"icon": "icon-circle-blank"
+	},
 
-    "outputRoles": [
-        {
-            "name": "main_output",
-            "label": "Results Dataset",
-            "description": "Connection creation results from last run",
-            "arity": "UNARY",
-            "required": true,
-            "acceptsDataset": true
-        }
-    ],
+	"kind": "PYTHON",
+	"selectableFromDataset": "input_list",
 
-    /* The field "params" holds a list of all the params
-       for wich the user will be prompted for values in the Settings tab of the recipe.
 
-       The available parameter types include:
-       STRING, STRINGS, INT, DOUBLE, BOOLEAN, SELECT, MULTISELECT, MAP, TEXTAREA, PRESET, COLUMN, COLUMNS
+	"inputRoles": [{
+		"name": "input_list",
+		"label": "Input List",
+		"description": "dataset with role-group combinations",
+		"arity": "UNARY",
+		"required": true,
+		"acceptsDataset": true
+	}],
 
-       For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
-    */
+	"outputRoles": [{
+		"name": "main_output",
+		"label": "Results Dataset",
+		"description": "Connection creation results from last run",
+		"arity": "UNARY",
+		"required": true,
+		"acceptsDataset": true
+	}],
 
-    "params": [
-        {
-            "name": "connection",
-            "label": "Connection",
-            "type": "STRING",
-            "description": "Connection with lookup role",
-            "mandatory": true
-        }
-    ],
 
-    // The field "resourceKeys" holds a list of keys that allows to limit the number
-    // of concurrent executions and activities triggered by this recipe.
-    //
-    // Administrators can configure the limit per resource key in the Administration > Settings > Flow build
-    // screen.
+	"params": [{
+		"name": "connection",
+		"label": "Connection",
+		"type": "STRING",
+		"description": "Connection with lookup role",
+		"mandatory": true
+	}],
 
-    "resourceKeys": []
+	"resourceKeys": []
 
 }
