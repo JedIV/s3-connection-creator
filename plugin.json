@@ -11,7 +11,7 @@
         "label": "S3 connection creator",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "",
+        "description": "Generates a set of S3 connections for list of roles and the groups to associate them with.",
 
         "author": "Jed Dougherty",
 
