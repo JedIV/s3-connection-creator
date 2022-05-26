@@ -141,6 +141,6 @@ for role in roles:
 
     clean_roles.append(role)
 
-list_of_connections = dataiku.Dataset("role_connections")
+list_of_connections = dataiku.Dataset(output_A_names[0])
 list_of_connections.write_with_schema(pd.DataFrame(clean_roles))
 
