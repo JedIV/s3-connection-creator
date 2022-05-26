@@ -20,13 +20,12 @@ from dataiku.customrecipe import *
 # Roles need to be defined in recipe.json, in the inputRoles and outputRoles fields.
 
 # To  retrieve the datasets of an input role named 'input_A' as an array of dataset names:
-input_A_names = get_input_names_for_role('input_A_role')
-# The dataset objects themselves can then be created like this:
-input_A_datasets = [dataiku.Dataset(name) for name in input_A_names]
+input_A_names = get_input_names_for_role('input_list')
+
 
 # For outputs, the process is the same:
 output_A_names = get_output_names_for_role('main_output')
-output_A_datasets = [dataiku.Dataset(name) for name in output_A_names]
+
 
 
 # The configuration consists of the parameters set up by the user in the recipe Settings tab.
@@ -62,7 +61,7 @@ from typing import Dict, List
 from ast import literal_eval
 
 # Read recipe inputs
-role_groups = dataiku.Dataset("role_groups")
+role_groups = dataiku.Dataset(input_A_names[0])
 role_groups_df = role_groups.get_dataframe()
 role_groups_df["groups"] = role_groups_df["groups"].apply(literal_eval)
 
