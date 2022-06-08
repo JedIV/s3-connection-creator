@@ -136,6 +136,8 @@ for role in roles:
             new_connection = dku_client.get_connection(name)
         role["result"] = "success"
         definition = new_connection.get_definition()
+        definition['usableBy'] = 'ALLOWED'
+        definition['allowedGroups'] = role["groups"]
         definition['detailsReadability'] = {'readableBy': 'ALLOWED', 'allowedGroups': role["groups"]}
         new_connection.set_definition(definition)
     except Exception as e: role["result"] = e
