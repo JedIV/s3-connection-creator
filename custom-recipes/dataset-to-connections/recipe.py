@@ -62,7 +62,7 @@ roles = roles + full_list
 clean_roles = []
 
 
-# 
+# generate connections
 for role in roles:
 
     if "bucket" in role:
