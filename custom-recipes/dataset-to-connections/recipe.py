@@ -88,7 +88,7 @@ for role in roles:
       'dkuProperties': [],
       'namingRule': {}}
     try:
-        if name not in client.list_connections():
+        if name not in dku_client.list_connections():
             new_connection = dku_client.create_connection(name, type='EC2', params=params, usable_by='ALLOWED', allowed_groups= role["groups"])
         else:
             new_connection = dku_client.get_connection(name)
