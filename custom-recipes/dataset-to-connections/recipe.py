@@ -8,24 +8,11 @@ import boto3
 from typing import Dict, List
 from ast import literal_eval
 
+# get input and output datasets
 input_A_names = get_input_names_for_role('input_list')
-
 output_A_names = get_output_names_for_role('main_output')
 
-connection = get_recipe_config()['connection']
-
-my_variable = get_recipe_config().get('parameter_name', None)
-
-
-
-# Read recipe inputs
-role_groups = dataiku.Dataset(input_A_names[0])
-role_groups_df = role_groups.get_dataframe()
-role_groups_df["groups"] = role_groups_df["groups"].apply(literal_eval)
-
-rg_list = role_groups_df.to_dict('records')
-
-
+# get admin connection
 # set connection with role to load bucket information here.
 # the role should have the following policy attached:
 #{
@@ -47,6 +34,15 @@ rg_list = role_groups_df.to_dict('records')
 #    ]
 #}
 
+connection = get_recipe_config()['connection']
+
+# Read recipe inputs
+role_groups = dataiku.Dataset(input_A_names[0])
+role_groups_df = role_groups.get_dataframe()
+role_groups_df["groups"] = role_groups_df["groups"].apply(literal_eval)
+
+rg_list = role_groups_df.to_dict('records')
+
 client = get_boto3_iam_client(connection)
 
 role_generator = Aws_Roles(client)
@@ -56,6 +52,7 @@ roles = rg_list
 
 dku_client = dataiku.api_client()
 
+# generate the full list of role/bucket combinations
 policy_map = role_generator.get_policies_for_roles(roles)
 policy_list = role_generator.get_policy_role_list(policy_map)
 full_list = role_generator.get_buckets_policy_role_list(policy_list)
@@ -64,6 +61,8 @@ roles = roles + full_list
 
 clean_roles = []
 
+
+# 
 for role in roles:
 
     if "bucket" in role:
