@@ -130,7 +130,10 @@ for role in roles:
       'dkuProperties': [],
       'namingRule': {}}
     try:
-        new_connection = dku_client.create_connection(name, type='EC2', params=params, usable_by='ALLOWED', allowed_groups= role["groups"])
+        if name not in client.list_connections():
+            new_connection = dku_client.create_connection(name, type='EC2', params=params, usable_by='ALLOWED', allowed_groups= role["groups"])
+        else:
+            new_connection = dku_client.get_connection(name)
         role["result"] = "success"
         definition = new_connection.get_definition()
         definition['detailsReadability'] = {'readableBy': 'ALLOWED', 'allowedGroups': role["groups"]}
