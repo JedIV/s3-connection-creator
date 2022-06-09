@@ -7,7 +7,6 @@ from typing import Dict, List
 from ast import literal_eval
 from boto_connections import Aws_Roles, get_boto3_iam_client
 
-
 # get input and output datasets
 input_A_names = get_input_names_for_role('input_list')
 output_A_names = get_output_names_for_role('main_output')
