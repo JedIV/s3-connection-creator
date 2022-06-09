@@ -1,12 +1,12 @@
-
 import dataiku
 from dataiku.customrecipe import *
 from dataiku import pandasutils as pdu
 import pandas as pd
-from boto_connections import Aws_Roles, get_boto3_iam_client
 import boto3
 from typing import Dict, List
 from ast import literal_eval
+from boto_connections import Aws_Roles, get_boto3_iam_client
+
 
 # get input and output datasets
 input_A_names = get_input_names_for_role('input_list')
